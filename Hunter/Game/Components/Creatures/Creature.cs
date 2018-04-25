@@ -1,5 +1,4 @@
-﻿using System.Threading;
-using Hunter.Engine.Components.Content;
+﻿using Hunter.Engine.Components.Content;
 using Hunter.Engine.Components.Graphics;
 using Hunter.Game.Components.Controllers;
 using Microsoft.Xna.Framework;
