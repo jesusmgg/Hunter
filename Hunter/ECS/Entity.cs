@@ -76,12 +76,14 @@ namespace Hunter.ECS
         {
             entitiesToAdd.Enqueue(entity);
             entity.game = game;
+            entity.parent = this;
         }
         
         public void RemoveChild(Entity entity)
         {
             entitiesToRemove.Enqueue(entity);
             entity.game = null;
+            entity.parent = null;
         }
 
         void ProcessQueues()
@@ -106,8 +108,6 @@ namespace Hunter.ECS
 
         public void Start()
         {
-            ProcessQueues();
-            
             foreach (var component in components)
             {
                 if (component.enabled && !component.started)
@@ -121,12 +121,12 @@ namespace Hunter.ECS
             {
                 entity.Start();
             }
+            
+            ProcessQueues();
         }
         
         public void Update()
         {
-            ProcessQueues();
-            
             foreach (var component in components)
             {
                 if (component.enabled && !component.started)
@@ -145,6 +145,8 @@ namespace Hunter.ECS
             {
                 entity.Update();
             }
+            
+            ProcessQueues();
         }
 
         public void Draw()

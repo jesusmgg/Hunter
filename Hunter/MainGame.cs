@@ -44,7 +44,7 @@ namespace Hunter
                 Exit();
             }
             
-            mainScene.Update();
+            mainScene.Update(gameTime);
             
             base.Update(gameTime);
         }

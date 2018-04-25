@@ -1,10 +1,13 @@
 ﻿using Hunter.ECS;
-using Hunter.Engine.Components.Base;
+using Microsoft.Xna.Framework;
+using GameComponent = Hunter.Engine.Components.Base.GameComponent;
 
 namespace Hunter.Engine.Entities.Base
 {
     public class GameObject : Entity
     {
+        public GameTime gameTime;
+        
         public GameObject(MainGame game=null)
         {
             if (game == null)
@@ -35,6 +38,12 @@ namespace Hunter.Engine.Entities.Base
         {
             base.RemoveChild(gameObject);
             gameObject.game = null;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+            base.Update();
+            this.gameTime = gameTime;
         }
     }
 }
