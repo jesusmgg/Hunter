@@ -1,4 +1,5 @@
-﻿using Hunter.Engine.Components.Content;
+﻿using System;
+using Hunter.Engine.Components.Content;
 using Hunter.Engine.Components.Graphics;
 using Hunter.Game.Components.Controllers;
 using Microsoft.Xna.Framework;
@@ -34,9 +35,31 @@ namespace Hunter.Game.Components.Creatures
 
         public override void Update()
         {
+            System.Console.WriteLine(transform.position.X);
+            
             float deltaTime = gameController.deltaTime;
             
             transform.position = transform.position + new Vector2(speed * deltaTime, 0.0f);
+        }
+
+        Vector2 GetRandomDestination()
+        {
+            Vector2 destination = new Vector2();
+
+            float minX = 50.0f;
+            float maxX = 500.0f;
+            float minY = 50.0f;
+            float maxY = 300.0f;
+            
+            Random random = new Random();
+            
+            float randomNumber = (float) random.NextDouble();
+            float x = MathHelper.Lerp(-minX, +maxX, randomNumber);
+            
+            randomNumber = (float) random.NextDouble();
+            float y = MathHelper.Lerp(-minY, +maxY, randomNumber);
+
+            return destination;
         }
     }
 }

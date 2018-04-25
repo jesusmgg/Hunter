@@ -13,7 +13,7 @@ namespace Hunter.Game.Components.Controllers
         public ContentManager contentManager;
         
         public GameTime gameTime;
-        public float deltaTime = 0.0f;
+        public float deltaTime;
 
         public override void Start()
         {
