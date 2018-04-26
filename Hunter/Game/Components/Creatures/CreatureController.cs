@@ -18,7 +18,7 @@ namespace Hunter.Game.Components.Creatures
         
         public override void Start()
         {
-            name = "Creature";
+            name = "CreatureController";
                 
             ContentManager contentManager = gameController.gameObject.GetComponent<ContentManager>();
             

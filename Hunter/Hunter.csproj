@@ -34,7 +34,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework, Version=3.6.0.1625, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\MonoGame.Framework.DesktopGL.3.6.0.1625\lib\net40\MonoGame.Framework.dll</HintPath>
+      <HintPath>..\packages\MonoGame.Framework.Portable.3.6.0.1625\lib\portable-net45+win8+wpa81\MonoGame.Framework.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -52,12 +52,13 @@
     <Compile Include="ECS\Entity.cs" />
     <Compile Include="Engine\Components\Base\GameComponent.cs" />
     <Compile Include="Engine\Components\Content\ContentManager.cs" />
+    <Compile Include="Engine\Components\Graphics\FrameCounter.cs" />
     <Compile Include="Engine\Components\Graphics\SpriteRenderer.cs" />
     <Compile Include="Engine\Components\Graphics\Transform.cs" />
     <Compile Include="Engine\Entities\Base\GameObject.cs" />
     <Compile Include="Engine\Entities\Scenes\Scene.cs" />
     <Compile Include="Game\Components\Controllers\GameController.cs" />
-    <Compile Include="Game\Components\Creatures\Creature.cs" />
+    <Compile Include="Game\Components\Creatures\CreatureController.cs" />
     <Compile Include="Game\Entities\Controllers\MainController.cs" />
     <Compile Include="Game\Entities\Scenes\MainScene.cs" />
     <Compile Include="MainGame.cs" />
@@ -74,6 +75,7 @@
     <Content Include="Assets\**">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content.mgcb" />
     <Folder Include="Assets\Maps" />
     <Folder Include="Engine\Components\Input" />
     <Folder Include="Engine\Components\Scenes" />

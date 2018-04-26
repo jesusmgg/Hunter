@@ -11,6 +11,7 @@ namespace Hunter.Engine.Components.Content
         readonly string assetsBasePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Assets/";
         
         public Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
+        public Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
 
         public override void Start()
         {
@@ -29,6 +30,15 @@ namespace Hunter.Engine.Components.Content
                 if (gameObject?.game?.graphicsDevice?.GraphicsDevice != null)
                 {
                     Texture2D texture = Texture2D.FromStream(entity.game.graphicsDevice.GraphicsDevice, fileStream);
+                    textures.Add(name, texture);
+                }
+            }
+            
+            else if (typeof(T) == typeof(SpriteFont))
+            {
+                if (gameObject?.game?.graphicsDevice?.GraphicsDevice != null)
+                {
+                    SpriteFont font = new SpriteFont();//.FromStream(entity.game.graphicsDevice.GraphicsDevice, fileStream);
                     textures.Add(name, texture);
                 }
             }
