@@ -1,3 +1,3 @@
 ## Hunter
 
-Monogame project. Made for Ludum Dare 41.
+Monogame project. Small and short God game.
