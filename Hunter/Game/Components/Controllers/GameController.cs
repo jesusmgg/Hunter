@@ -24,6 +24,9 @@ namespace Hunter.Game.Components.Controllers
         {
             gameTime = new GameTime();
             
+            // Frame counter
+            gameObject.AddComponent(new FrameCounter {gameController = this});
+            
             // Game objects creation
             GameObject creature = new GameObject();
             creature.name = "Creature1";

@@ -14,6 +14,8 @@ namespace Hunter.Game.Components.Creatures
         Transform transform;
         SpriteRenderer spriteRenderer;
 
+        Vector2 currentDestination;
+
         float speed = 200.0f;
         
         public CreatureController()
@@ -25,12 +27,14 @@ namespace Hunter.Game.Components.Creatures
         {
             // Sprite creation
             transform = new Transform();
-            spriteRenderer = new SpriteRenderer();            
-            
             gameObject.AddComponent(transform);
+            
+            spriteRenderer = new SpriteRenderer();            
             gameObject.AddComponent(spriteRenderer);
             
             transform.position = new Vector2(100.0f, 100.0f);
+
+            currentDestination = transform.position;
         }
 
         public override void LoadContent()
@@ -42,7 +46,7 @@ namespace Hunter.Game.Components.Creatures
 
         public override void Update()
         {
-            //Console.WriteLine(transform.position.X);
+            Console.WriteLine(transform.position.X);
             
             float deltaTime = gameController.deltaTime;
             
@@ -54,7 +58,7 @@ namespace Hunter.Game.Components.Creatures
             Vector2 destination = new Vector2();
 
             float minX = 50.0f;
-            float maxX = 500.0f;
+            float maxX = 500.0f;    
             float minY = 50.0f;
             float maxY = 300.0f;
             
