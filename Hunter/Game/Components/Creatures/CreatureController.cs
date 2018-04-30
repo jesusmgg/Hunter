@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using Hunter.Engine.Components.Content;
 using Hunter.Engine.Components.Graphics;
 using Hunter.Game.Components.Controllers;
@@ -14,9 +15,12 @@ namespace Hunter.Game.Components.Creatures
         Transform transform;
         SpriteRenderer spriteRenderer;
 
+        float destinationTolerance = 0.05f;
+
+        Vector2 currentStartingPosition;
         Vector2 currentDestination;
 
-        float speed = 200.0f;
+        float speed = 50.0f;
         
         public CreatureController()
         {
@@ -33,8 +37,9 @@ namespace Hunter.Game.Components.Creatures
             gameObject.AddComponent(spriteRenderer);
             
             transform.position = new Vector2(100.0f, 100.0f);
-
-            currentDestination = transform.position;
+            
+            currentStartingPosition = transform.position;
+            currentDestination = GetRandomDestination();
         }
 
         public override void LoadContent()
@@ -46,11 +51,18 @@ namespace Hunter.Game.Components.Creatures
 
         public override void Update()
         {
-            Console.WriteLine(transform.position.X);
-            
             float deltaTime = gameController.deltaTime;
+
+            float progress = ((currentStartingPosition - transform.position).Length() + speed * deltaTime) / (currentDestination - currentStartingPosition).Length();
             
-            transform.position = transform.position + new Vector2(speed * deltaTime, 0.0f);
+            transform.position.X = MathHelper.Lerp(currentStartingPosition.X, currentDestination.X, progress);
+            transform.position.Y = MathHelper.Lerp(currentStartingPosition.Y, currentDestination.Y, progress);
+
+            if (progress >= 1.0f - destinationTolerance)
+            {
+                currentDestination = GetRandomDestination();
+                currentStartingPosition = transform.position;
+            }
         }
 
         Vector2 GetRandomDestination()
@@ -65,10 +77,10 @@ namespace Hunter.Game.Components.Creatures
             Random random = new Random();
             
             float randomNumber = (float) random.NextDouble();
-            float x = MathHelper.Lerp(-minX, +maxX, randomNumber);
+            destination.X = MathHelper.Lerp(minX, maxX, randomNumber);
             
             randomNumber = (float) random.NextDouble();
-            float y = MathHelper.Lerp(-minY, +maxY, randomNumber);
+            destination.Y = MathHelper.Lerp(minY, maxY, randomNumber);
 
             return destination;
         }
