@@ -1,4 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Data.Common;
+using System.Linq.Expressions;
 
 namespace Hunter.ECS
 {
@@ -76,12 +78,14 @@ namespace Hunter.ECS
         {
             entitiesToAdd.Enqueue(entity);
             entity.game = game;
+            entity.parent = this;
         }
         
         public void RemoveChild(Entity entity)
         {
             entitiesToRemove.Enqueue(entity);
             entity.game = null;
+            entity.parent = null;
         }
 
         void ProcessQueues()
@@ -106,12 +110,11 @@ namespace Hunter.ECS
 
         public void Start()
         {
-            ProcessQueues();
-            
             foreach (var component in components)
             {
                 if (component.enabled && !component.started)
                 {
+                    System.Console.WriteLine("Starting " + component.name + ".");
                     component.Start();
                     component.started = true;
                 }
@@ -121,18 +124,26 @@ namespace Hunter.ECS
             {
                 entity.Start();
             }
+            
+            ProcessQueues();
         }
         
         public void Update()
         {
-            ProcessQueues();
-            
             foreach (var component in components)
             {
                 if (component.enabled && !component.started)
                 {
+                    System.Console.WriteLine("Starting " + component.name + ".");
                     component.Start();
                     component.started = true;
+                }
+                
+                if (component.enabled && !component.contentLoaded)
+                {
+                    System.Console.WriteLine("Loading " + component.name + " content.");
+                    component.LoadContent();
+                    component.contentLoaded = true;
                 }
                 
                 if (component.enabled)
@@ -145,6 +156,8 @@ namespace Hunter.ECS
             {
                 entity.Update();
             }
+            
+            ProcessQueues();
         }
 
         public void Draw()
@@ -160,6 +173,41 @@ namespace Hunter.ECS
             foreach (Entity entity in children)
             {
                 entity.Draw();
+            }
+        }
+        
+        public void LoadContent()
+        {
+            foreach (var component in components)
+            {
+                if (component.enabled && !component.contentLoaded)
+                {
+                    System.Console.WriteLine("Loading " + component.name + " content.");
+                    component.LoadContent();
+                    component.contentLoaded = true;
+                }
+            }
+
+            foreach (Entity entity in children)
+            {
+                entity.LoadContent();
+            }
+        }
+        
+        public void UnloadContent()
+        {
+            foreach (var component in components)
+            {
+                if (component.enabled)
+                {
+                    System.Console.WriteLine("Unloading " + component.name + " content.");
+                    component.UnloadContent();
+                }
+            }
+
+            foreach (Entity entity in children)
+            {
+                entity.UnloadContent();
             }
         }
     }

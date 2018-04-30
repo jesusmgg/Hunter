@@ -10,6 +10,11 @@ namespace Hunter.Engine.Components.Graphics
 
         public Rectangle rectangle;
 
+        public Transform()
+        {
+            name = "Transform";
+        }
+
         public override void Start()
         {
             position = new Vector2();

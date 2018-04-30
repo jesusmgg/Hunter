@@ -14,13 +14,16 @@ namespace Hunter
         
         public MainGame()
         {
+            System.Console.WriteLine("Starting game.");
             graphicsDevice = new GraphicsDeviceManager(this) {PreferMultiSampling = true};
+            Content.RootDirectory = "Assets";
             
             mainScene = new MainScene(this);
         }
 
         protected override void Initialize()
         {
+            System.Console.WriteLine("Calling main Start method.");
             base.Initialize();
             
             mainScene.Start();
@@ -28,11 +31,17 @@ namespace Hunter
 
         protected override void LoadContent()
         {
+            System.Console.WriteLine("Calling main LoadContent method.");
+            
             spriteBatch = new SpriteBatch(GraphicsDevice);
+            
+            mainScene.LoadContent();
         }
 
         protected override void UnloadContent()
         {
+            System.Console.WriteLine("Calling main UnloadContent method.");
+            mainScene.UnloadContent();
         }
 
         protected override void Update(GameTime gameTime)
@@ -44,7 +53,7 @@ namespace Hunter
                 Exit();
             }
             
-            mainScene.Update();
+            mainScene.Update(gameTime);
             
             base.Update(gameTime);
         }

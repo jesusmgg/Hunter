@@ -8,9 +8,13 @@ namespace Hunter.Engine.Components.Content
 {
     public class ContentManager : GameComponent
     {
-        readonly string assetsBasePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location) + "/Assets/";
-        
         public Dictionary<string, Texture2D> textures = new Dictionary<string, Texture2D>();
+        public Dictionary<string, SpriteFont> fonts = new Dictionary<string, SpriteFont>();
+
+        public ContentManager()
+        {
+            name = "ContentManager";
+        }
 
         public override void Start()
         {
@@ -22,18 +26,23 @@ namespace Hunter.Engine.Components.Content
 
         public void Load<T>(string name, string path)
         {
-            FileStream fileStream = new FileStream(assetsBasePath + path, FileMode.Open);
-                
             if (typeof(T) == typeof(Texture2D))
             {
                 if (gameObject?.game?.graphicsDevice?.GraphicsDevice != null)
                 {
-                    Texture2D texture = Texture2D.FromStream(entity.game.graphicsDevice.GraphicsDevice, fileStream);
+                    Texture2D texture = gameObject.game.Content.Load<Texture2D>(path);
                     textures.Add(name, texture);
                 }
             }
             
-            fileStream.Dispose();
+            else if (typeof(T) == typeof(SpriteFont))
+            {
+                if (gameObject?.game?.graphicsDevice?.GraphicsDevice != null)
+                {
+                    SpriteFont font = gameObject.game.Content.Load<SpriteFont>(path);
+                    fonts.Add(name, font);
+                }
+            }
         }
     }
 }

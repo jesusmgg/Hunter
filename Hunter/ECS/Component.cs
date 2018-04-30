@@ -6,6 +6,7 @@
         
         public bool enabled;
         public bool started;
+        public bool contentLoaded;
         
         public Entity entity;
 
@@ -13,6 +14,7 @@
         {
             enabled = true;
             started = false;
+            contentLoaded = false;
         }
 
         public virtual void Start()
@@ -24,6 +26,14 @@
         }
         
         public virtual void Draw()
+        {
+        }
+        
+        public virtual void LoadContent()
+        {
+        }
+        
+        public virtual void UnloadContent()
         {
         }
     }
