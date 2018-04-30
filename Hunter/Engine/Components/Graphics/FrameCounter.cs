@@ -18,6 +18,11 @@ namespace Hunter.Engine.Components.Graphics
         public const int MaximumSamples = 100;
 
         private Queue<float> _sampleBuffer = new Queue<float>();
+        
+        public FrameCounter()
+        {
+            name = "FrameCounter";
+        }
 
         public override void Update()
         {
@@ -48,7 +53,7 @@ namespace Hunter.Engine.Components.Graphics
             {
                 var fps = string.Format("FPS: {0}", AverageFramesPerSecond);
 
-                gameObject?.game?.spriteBatch?.DrawString(_spriteFont, fps, new Vector2(1, 1), Color.Black);
+                gameObject?.game?.spriteBatch?.DrawString(gameController.contentManager.fonts["Arial"], fps, new Vector2(1, 1), Color.Black);
 
                 // other draw code here
             }

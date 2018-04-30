@@ -7,7 +7,7 @@ using GameComponent = Hunter.Engine.Components.Base.GameComponent;
 
 namespace Hunter.Game.Components.Creatures
 {
-    public class Creature : GameComponent
+    public class CreatureController : GameComponent
     {
         public GameController gameController;
 
@@ -16,12 +16,13 @@ namespace Hunter.Game.Components.Creatures
 
         float speed = 200.0f;
         
-        public override void Start()
+        public CreatureController()
         {
             name = "CreatureController";
-                
-            ContentManager contentManager = gameController.gameObject.GetComponent<ContentManager>();
-            
+        }
+        
+        public override void Start()
+        {
             // Sprite creation
             transform = new Transform();
             spriteRenderer = new SpriteRenderer();            
@@ -29,13 +30,19 @@ namespace Hunter.Game.Components.Creatures
             gameObject.AddComponent(transform);
             gameObject.AddComponent(spriteRenderer);
             
-            spriteRenderer.texture2D = contentManager.textures["creature_1"];
             transform.position = new Vector2(100.0f, 100.0f);
+        }
+
+        public override void LoadContent()
+        {
+            ContentManager contentManager = gameController.gameObject.GetComponent<ContentManager>();
+            
+            spriteRenderer.texture2D = contentManager.textures["creature_1"];
         }
 
         public override void Update()
         {
-            System.Console.WriteLine(transform.position.X);
+            //Console.WriteLine(transform.position.X);
             
             float deltaTime = gameController.deltaTime;
             

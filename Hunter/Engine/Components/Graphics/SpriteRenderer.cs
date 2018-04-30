@@ -8,6 +8,11 @@ namespace Hunter.Engine.Components.Graphics
         public Texture2D texture2D;
         public Rectangle rectangle;
 
+        public SpriteRenderer()
+        {
+            name = "SpriteRenderer";
+        }
+
         public override void Start()
         {
             if (texture2D != null)
@@ -29,7 +34,10 @@ namespace Hunter.Engine.Components.Graphics
 
         public override void Draw()
         {
-            gameObject.game?.spriteBatch?.Draw(texture2D, rectangle, new Color(Color.White.ToVector4()));
+            if (texture2D != null)
+            {
+                gameObject?.game?.spriteBatch?.Draw(texture2D, rectangle, new Color(Color.White.ToVector4()));    
+            }
         }
 
         void UpdateRectangleWithTransform()
