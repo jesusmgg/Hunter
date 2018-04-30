@@ -17,9 +17,26 @@ namespace Hunter.Engine.Components.Graphics
 
         public override void Start()
         {
-            position = new Vector2();
-            rotation = new Vector2();
-            scale = new Vector2();
+            // ReSharper disable ConditionIsAlwaysTrueOrFalse
+            // ReSharper disable HeuristicUnreachableCode
+            
+            if (position == null)
+            {
+                position = new Vector2();
+            }
+            
+            if (rotation == null)
+            {
+                rotation = new Vector2();
+            }
+
+            if (scale == null)
+            {
+                scale = new Vector2();
+            }
+            
+            // ReSharper restore HeuristicUnreachableCode
+            // ReSharper restore ConditionIsAlwaysTrueOrFalse
         }
     }
 }

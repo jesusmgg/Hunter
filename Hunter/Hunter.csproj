@@ -73,8 +73,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Fonts\Arial.spritefont" />
+    <Content Include="Assets\hunter_tileset.tsx" />
+    <Content Include="Assets\Maps\map1.tmx" />
+    <Content Include="Assets\Sprites\Creatures\creature_1.png" />
+    <Content Include="Assets\Sprites\test.png" />
+    <Content Include="Assets\Sprites\Tiles\ground_1.png" />
+    <Content Include="Assets\Sprites\Tiles\ground_light_1.png" />
     <Content Include="Content.mgcb" />
-    <Folder Include="Assets\Maps" />
     <Folder Include="Engine\Components\Input" />
     <Folder Include="Engine\Components\Scenes" />
   </ItemGroup>
