@@ -1,3 +1,3 @@
 ## Hunter
 
-Monogame project. Small and short God game.
+Monogame project. Small and short god game.
