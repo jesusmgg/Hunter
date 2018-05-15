@@ -12,8 +12,9 @@ namespace Hunter.Game.Components.Creatures
     {
         public GameController gameController;
 
-        Transform transform;
-        SpriteRenderer spriteRenderer;
+        private Transform transform;
+        private SpriteRenderer spriteRenderer;
+        private CreatureAI creatureAI;
 
         float destinationTolerance = 0.05f;
 
@@ -29,24 +30,24 @@ namespace Hunter.Game.Components.Creatures
         
         public override void Start()
         {
-            // Sprite creation
             transform = new Transform();
             gameObject.AddComponent(transform);
             
             spriteRenderer = new SpriteRenderer();            
             gameObject.AddComponent(spriteRenderer);
             
+            creatureAI = new CreatureAI();
+            gameObject.AddComponent(creatureAI);
+            
             transform.position = new Vector2(100.0f, 100.0f);
             
             currentStartingPosition = transform.position;
-            currentDestination = GetRandomDestination();
+            currentDestination = creatureAI.GetRandomDestination();
         }
 
         public override void LoadContent()
         {
-            ContentManager contentManager = gameController.gameObject.GetComponent<ContentManager>();
-            
-            spriteRenderer.texture2D = contentManager.textures["creature_1"];
+            spriteRenderer.texture2D = gameController.contentManager.textures["creature_1"];
         }
 
         public override void Update()
@@ -60,29 +61,9 @@ namespace Hunter.Game.Components.Creatures
 
             if (progress >= 1.0f - destinationTolerance)
             {
-                currentDestination = GetRandomDestination();
+                currentDestination = creatureAI.GetRandomDestination();
                 currentStartingPosition = transform.position;
             }
-        }
-
-        Vector2 GetRandomDestination()
-        {
-            Vector2 destination = new Vector2();
-
-            float minX = 50.0f;
-            float maxX = 500.0f;    
-            float minY = 50.0f;
-            float maxY = 300.0f;
-            
-            Random random = new Random();
-            
-            float randomNumber = (float) random.NextDouble();
-            destination.X = MathHelper.Lerp(minX, maxX, randomNumber);
-            
-            randomNumber = (float) random.NextDouble();
-            destination.Y = MathHelper.Lerp(minY, maxY, randomNumber);
-
-            return destination;
         }
     }
 }

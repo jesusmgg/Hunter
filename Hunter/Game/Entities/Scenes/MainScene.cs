@@ -10,7 +10,7 @@ namespace Hunter.Game.Entities.Scenes
         {
             // Main game controller
             MainController mainController = new MainController();
-            mainController.AddComponent(new GameController());
+            mainController.AddComponent(new GameController(), false);
             AddChild(mainController);
         }
     }

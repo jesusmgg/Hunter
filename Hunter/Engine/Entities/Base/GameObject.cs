@@ -16,10 +16,16 @@ namespace Hunter.Engine.Entities.Base
             }
         }
         
-        public void AddComponent(GameComponent component)
+        public void AddComponent(GameComponent component, bool startImmediately=true)
         {
             base.AddComponent(component);
             component.gameObject = this;
+
+            if (startImmediately && !component.started)
+            {
+                component.Start();
+                component.started = true;
+            }
         }
 
         public void RemoveComponent(GameComponent component)

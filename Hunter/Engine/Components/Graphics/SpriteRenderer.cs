@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace Hunter.Engine.Components.Graphics
@@ -24,29 +25,37 @@ namespace Hunter.Engine.Components.Graphics
                 rectangle = new Rectangle();
             }
             
-            UpdateRectangleWithTransform();
+            UpdateRectangle();
         }
 
         public override void Update()
         {
-            UpdateRectangleWithTransform();
+            UpdateRectangle();
         }
 
         public override void Draw()
         {
             if (texture2D != null)
             {
-                gameObject?.game?.spriteBatch?.Draw(texture2D, rectangle, new Color(Color.White.ToVector4()));    
+                gameObject.game.spriteBatch.Draw(texture2D, rectangle, new Color(Color.White.ToVector4()));    
             }
         }
 
-        void UpdateRectangleWithTransform()
+        void UpdateRectangle()
         {
             Transform transform = gameObject.GetComponent<Transform>();
             if (transform != null)
             {
                 rectangle.X = (int) transform.position.X;
                 rectangle.Y = (int) transform.position.Y;
+            }
+
+            if (texture2D != null)
+            {
+                if (rectangle.Size != texture2D.Bounds.Size)
+                {
+                    rectangle.Size = texture2D.Bounds.Size;   
+                }
             }
         }
     }

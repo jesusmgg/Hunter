@@ -24,6 +24,11 @@ namespace Hunter.Game.Components.Controllers
         {
             gameTime = new GameTime();
             
+            // Content manager
+            contentManager = new ContentManager();
+            contentManager.name = "ContentManager";
+            gameObject.AddComponent(contentManager);
+            
             // Frame counter
             gameObject.AddComponent(new FrameCounter {gameController = this});
             
@@ -36,10 +41,6 @@ namespace Hunter.Game.Components.Controllers
 
         public override void LoadContent()
         {
-            contentManager = new ContentManager();
-            contentManager.name = "ContentManager";
-            gameObject.AddComponent(contentManager);
-            
             // Sprites
             contentManager.Load<Texture2D>("sprite_ship", "Sprites/test");
             contentManager.Load<Texture2D>("creature_1", "Sprites/Creatures/creature_1");
