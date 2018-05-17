@@ -58,6 +58,7 @@
     <Compile Include="Engine\Components\Graphics\Transform.cs" />
     <Compile Include="Engine\Entities\Base\GameObject.cs" />
     <Compile Include="Engine\Entities\Scenes\Scene.cs" />
+    <Compile Include="Game\Components\Common\Stats.cs" />
     <Compile Include="Game\Components\Controllers\GameController.cs" />
     <Compile Include="Game\Components\Creatures\CreatureAI.cs" />
     <Compile Include="Game\Components\Creatures\CreatureController.cs" />

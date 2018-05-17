@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Hunter.Engine.Components.Content;
 using Hunter.Engine.Components.Graphics;
 using Hunter.Game.Components.Controllers;
@@ -25,6 +26,17 @@ namespace Hunter.Game.Components.Creatures
         float speed = 50.0f;
         
         float destinationTolerance = 0.05f;
+
+        private readonly Dictionary<string, int> states = new Dictionary<string, int>
+        {
+            {"idle", 501},
+            {"collecting_straw", 502},
+            {"collecting_food", 503},
+            {"alert", 504},
+            {"fighting", 505},
+        };
+        
+        public int state;
         
         public CreatureAI()
         {
@@ -38,10 +50,16 @@ namespace Hunter.Game.Components.Creatures
             currentDestination = GetRandomDestination();
 
             gameController = gameObject.GetComponent<GameController>();
+
+            state = states["idle"];
         }
 
         public override void Update()
         {
+            if (state == states["idle"])
+            {
+                
+            }
         }
 
         public Vector2 GetRandomDestination()
