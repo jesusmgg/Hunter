@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using Hunter.Engine.Components.Content;
 using Hunter.Engine.Components.Graphics;
+using Hunter.Game.Components.Common;
 using Hunter.Game.Components.Controllers;
 using Microsoft.Xna.Framework;
 using GameComponent = Hunter.Engine.Components.Base.GameComponent;
@@ -15,6 +16,7 @@ namespace Hunter.Game.Components.Creatures
         private Transform transform;
         private SpriteRenderer spriteRenderer;
         private CreatureAI creatureAI;
+        private Stats stats;
 
         float destinationTolerance = 0.05f;
 
@@ -35,6 +37,13 @@ namespace Hunter.Game.Components.Creatures
             
             spriteRenderer = new SpriteRenderer();            
             gameObject.AddComponent(spriteRenderer);
+
+            stats = new Stats
+            {
+                hitPoints = 10,
+                damage = 1
+            };
+            gameObject.AddComponent(stats);
             
             creatureAI = new CreatureAI();
             gameObject.AddComponent(creatureAI);
