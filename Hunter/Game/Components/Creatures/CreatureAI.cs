@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using Hunter.Engine.Components.Content;
 using Hunter.Engine.Components.Graphics;
 using Hunter.Game.Components.Controllers;
@@ -27,13 +28,13 @@ namespace Hunter.Game.Components.Creatures
         
         float destinationTolerance = 0.05f;
 
-        private readonly Dictionary<string, int> states = new Dictionary<string, int>
+        private enum States
         {
-            {"idle", 501},
-            {"collecting_straw", 502},
-            {"collecting_food", 503},
-            {"alert", 504},
-            {"fighting", 505},
+            Idle,
+            CollectingStraw,
+            CollectingFood,
+            Alerted,
+            Fighting,
         };
         
         public int state;
@@ -51,14 +52,43 @@ namespace Hunter.Game.Components.Creatures
 
             gameController = gameObject.GetComponent<GameController>();
 
-            state = states["idle"];
+            state = (int) States.Idle;
         }
 
         public override void Update()
         {
-            if (state == states["idle"])
+            switch (state)
             {
+                case (int) States.Idle:
+                {
+                    break;
+                }
                 
+                case (int) States.CollectingStraw:
+                {
+                    break;
+                }
+                
+                case (int) States.CollectingFood:
+                {
+                    break;
+                }
+                
+                case (int) States.Alerted:
+                {
+                    break;
+                }
+                
+                case (int) States.Fighting:
+                {
+                    break;
+                }
+
+                default:
+                {
+                    Console.WriteLine(name + ": entered non-existent state.");
+                    break;
+                }
             }
         }
 
